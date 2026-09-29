@@ -1,9 +1,73 @@
 import Link from 'next/link'
-import { ArrowUpRight, Mail, MapPin, Menu, MessageCircle, Scale } from 'lucide-react'
-import { mainNav, site, specialistResources } from '@/lib/site-data'
+import { ArrowUpRight, ChevronDown, Mail, MapPin, Menu, MessageCircle, Scale } from 'lucide-react'
+import { mainNav, megaNavGroups, site, specialistResources } from '@/lib/site-data'
 
 function cleanPhone(phone) {
   return phone.replace(/\D/g, '').replace(/^0/, '92')
+}
+
+function MegaNavigation() {
+  return (
+    <nav className="desktop-nav" aria-label="Main navigation">
+      {mainNav.map((item) => {
+        if (!item.mega) return <Link key={item.href} href={item.href}>{item.label}</Link>
+        return (
+          <details className="mega-nav-item" key={item.href}>
+            <summary>{item.label} <ChevronDown size={13} /></summary>
+            <div className="mega-panel">
+              <div className="container mega-panel-inner">
+                <div className="mega-intro">
+                  <span className="mega-kicker">Pakistan Legal Forum</span>
+                  <h2>Legal knowledge by subject</h2>
+                  <p>Browse Pakistan-focused legal guides, procedures, certificates and professional reference material by practice area.</p>
+                  <Link href="/blogs/" className="mega-all-link">View all legal resources <ArrowUpRight size={14} /></Link>
+                </div>
+                <div className="mega-groups">
+                  {megaNavGroups.map((group) => (
+                    <section className="mega-group" key={group.label}>
+                      <Link className="mega-group-title" href={group.href}>{group.label}</Link>
+                      {group.items.map((child) => <Link key={child.href + child.label} href={child.href}>{child.label}</Link>)}
+                    </section>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </details>
+        )
+      })}
+    </nav>
+  )
+}
+
+function MobileNavigation() {
+  return (
+    <details className="mobile-menu">
+      <summary aria-label="Open navigation"><Menu size={21} /></summary>
+      <nav className="mobile-menu-panel" aria-label="Mobile navigation">
+        <Link href="/">Home</Link>
+        <details className="mobile-nav-groups">
+          <summary>Legal Guides <ChevronDown size={14} /></summary>
+          <div className="mobile-nav-group-list">
+            {megaNavGroups.map((group) => (
+              <details className="mobile-nav-group" key={group.label}>
+                <summary>{group.label}</summary>
+                <div>
+                  {group.items.map((child) => <Link key={child.href + child.label} href={child.href}>{child.label}</Link>)}
+                </div>
+              </details>
+            ))}
+          </div>
+        </details>
+        <Link href="/family-law-in-pakistan/">Family Law</Link>
+        <Link href="/pakistani-property-law/">Property Law</Link>
+        <Link href="/secp-company-registration-in-pakistan/">Tax &amp; Corporate</Link>
+        <Link href="/blogs/">Legal Resources</Link>
+        <Link href="/about-us/">About</Link>
+        <Link href="/contact-us/">Contact</Link>
+        <a href={`https://wa.me/${cleanPhone(site.phones.karachi)}`}>WhatsApp enquiry</a>
+      </nav>
+    </details>
+  )
 }
 
 export function SiteHeader({ interior = false }) {
@@ -24,18 +88,10 @@ export function SiteHeader({ interior = false }) {
           <span className="brand-mark"><Scale size={21} strokeWidth={1.4} /></span>
           <span><strong>PakLegal</strong><small>.com.pk</small><em>Pakistan Legal Forum</em></span>
         </Link>
-        <nav className="desktop-nav" aria-label="Main navigation">
-          {mainNav.map((item) => <Link key={item.href} href={item.href}>{item.label}</Link>)}
-        </nav>
+        <MegaNavigation />
         <div className="nav-actions">
           <a className="nav-cta" href={`https://wa.me/${cleanPhone(site.phones.karachi)}`}>Ask a legal question <ArrowUpRight size={15} /></a>
-          <details className="mobile-menu">
-            <summary aria-label="Open navigation"><Menu size={21} /></summary>
-            <nav className="mobile-menu-panel" aria-label="Mobile navigation">
-              {mainNav.map((item) => <Link key={item.href} href={item.href}>{item.label}</Link>)}
-              <a href={`https://wa.me/${cleanPhone(site.phones.karachi)}`}>WhatsApp enquiry</a>
-            </nav>
-          </details>
+          <MobileNavigation />
         </div>
       </div>
     </header>
@@ -56,11 +112,13 @@ export function SiteFooter() {
         </div>
         <div>
           <h4>Knowledge base</h4>
+          <Link href="/family-law-in-pakistan/">Family Law</Link>
           <Link href="/divorce-certificate/">Divorce Certificate</Link>
-          <Link href="/child-registration-certificate-crc/">Child Registration Certificate</Link>
           <Link href="/succession-certificate/">Succession Certificate</Link>
-          <Link href="/rental-and-tenancy-law/">Rental &amp; Tenancy Law</Link>
+          <Link href="/pakistani-property-law/">Property Law</Link>
+          <Link href="/fbr-income-tax-return-filing-pakistan/">Taxation</Link>
           <Link href="/secp-company-registration-in-pakistan/">Company Registration</Link>
+          <Link href="/blogs/">All Legal Guides</Link>
         </div>
         <div>
           <h4>Specialist resources</h4>
