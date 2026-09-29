@@ -29,7 +29,13 @@ export function SiteHeader({ interior = false }) {
         </nav>
         <div className="nav-actions">
           <a className="nav-cta" href={`https://wa.me/${cleanPhone(site.phones.karachi)}`}>Ask a legal question <ArrowUpRight size={15} /></a>
-          <button className="mobile-menu" type="button" aria-label="Open menu"><Menu size={21} /></button>
+          <details className="mobile-menu">
+            <summary aria-label="Open navigation"><Menu size={21} /></summary>
+            <nav className="mobile-menu-panel" aria-label="Mobile navigation">
+              {mainNav.map((item) => <Link key={item.href} href={item.href}>{item.label}</Link>)}
+              <a href={`https://wa.me/${cleanPhone(site.phones.karachi)}`}>WhatsApp enquiry</a>
+            </nav>
+          </details>
         </div>
       </div>
     </header>
