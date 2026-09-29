@@ -9,17 +9,29 @@ function idFromTitle(value = '') {
 
 function JsonLd({ guide }) {
   const url = `${site.url}/${guide.slug}/`
+  const logoUrl = `${site.url}/icon.svg`
+  const imageUrl = `${site.url}/paklegal-court.png`
+  const organization = {
+    '@type': 'Organization',
+    '@id': `${site.url}/#organization`,
+    name: site.name,
+    url: site.url,
+    logo: { '@type': 'ImageObject', url: logoUrl },
+    email: site.email,
+  }
   const graph = [
+    organization,
     {
       '@type': 'Article',
       '@id': `${url}#article`,
       headline: guide.h1,
       description: guide.description,
+      image: [imageUrl],
       dateModified: guide.reviewed,
       datePublished: guide.published || guide.reviewed,
-      mainEntityOfPage: url,
-      author: { '@type': 'Organization', name: site.name, url: site.url },
-      publisher: { '@type': 'Organization', name: site.name, url: site.url },
+      mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+      author: { '@id': `${site.url}/#organization` },
+      publisher: { '@id': `${site.url}/#organization` },
       inLanguage: 'en-PK',
     },
     {
