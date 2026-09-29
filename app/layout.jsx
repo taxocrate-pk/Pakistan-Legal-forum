@@ -1,6 +1,7 @@
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 import './knowledge-base.css'
+import './utility.css'
 
 export const metadata = {
   metadataBase: new URL('https://paklegal.com.pk'),
