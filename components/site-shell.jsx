@@ -1,9 +1,29 @@
 import Link from 'next/link'
-import { ArrowUpRight, ChevronDown, Mail, MapPin, Menu, MessageCircle, Scale } from 'lucide-react'
+import { ArrowUpRight, ChevronDown, Mail, MapPin, Menu, MessageCircle } from 'lucide-react'
 import { mainNav, megaNavGroups, site, specialistResources } from '@/lib/site-data'
 
 function cleanPhone(phone) {
   return phone.replace(/\D/g, '').replace(/^0/, '92')
+}
+
+function BrandLogo({ footer = false }) {
+  return (
+    <Link
+      className={`brand brand-image-link${footer ? ' brand-footer' : ''}`}
+      href="/"
+      aria-label="Pakistan Legal Forum home"
+      style={{ background: 'none' }}
+    >
+      <img
+        src="/pakistan-legal-forum-logo.webp"
+        alt="Pakistan Legal Forum"
+        className="navbar-brand-logo"
+        width="520"
+        height="110"
+        loading={footer ? 'lazy' : 'eager'}
+      />
+    </Link>
+  )
 }
 
 function MegaNavigation() {
@@ -84,10 +104,7 @@ export function SiteHeader({ interior = false }) {
         </div>
       </div>
       <div className="container nav-wrap">
-        <Link className="brand" href="/" aria-label="Pakistan Legal Forum home">
-          <span className="brand-mark"><Scale size={21} strokeWidth={1.4} /></span>
-          <span><strong>PakLegal</strong><small>.com.pk</small><em>Pakistan Legal Forum</em></span>
-        </Link>
+        <BrandLogo />
         <MegaNavigation />
         <div className="nav-actions">
           <a className="nav-cta" href={`https://wa.me/${cleanPhone(site.phones.karachi)}`}>Ask a legal question <ArrowUpRight size={15} /></a>
@@ -103,10 +120,7 @@ export function SiteFooter() {
     <footer className="site-footer">
       <div className="container footer-grid footer-grid-expanded">
         <div className="footer-brand">
-          <Link className="brand brand-footer" href="/">
-            <span className="brand-mark"><Scale size={21} strokeWidth={1.4} /></span>
-            <span><strong>PakLegal</strong><small>.com.pk</small><em>Pakistan Legal Forum</em></span>
-          </Link>
+          <BrandLogo footer />
           <p>Practical, source-led information about Pakistani law, legal documents and procedures, with specialist professional references where individual advice is required.</p>
           <a className="footer-contact-line" href={`mailto:${site.email}`}><Mail size={14} /> {site.email}</a>
         </div>
