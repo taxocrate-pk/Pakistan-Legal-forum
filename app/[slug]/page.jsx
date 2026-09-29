@@ -13,7 +13,7 @@ export async function generateMetadata({ params }) {
   if (!guide) return {}
   const url = `${site.url}/${guide.slug}/`
   return {
-    title: `${guide.shortTitle || guide.h1} | Pakistan Legal Forum`,
+    title: guide.shortTitle || guide.h1,
     description: guide.description,
     alternates: { canonical: url },
     openGraph: {
