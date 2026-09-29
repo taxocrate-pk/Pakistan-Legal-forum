@@ -3,6 +3,7 @@ import './globals.css'
 import './knowledge-base.css'
 import './utility.css'
 import './shell.css'
+import './navigation.css'
 
 export const metadata = {
   metadataBase: new URL('https://paklegal.com.pk'),
