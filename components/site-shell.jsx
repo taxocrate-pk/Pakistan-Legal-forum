@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { ArrowUpRight, ChevronDown, Mail, MapPin, Menu, MessageCircle } from 'lucide-react'
+import { ArrowUpRight, ChevronDown, Mail, MapPin, Menu, MessageCircle, Phone } from 'lucide-react'
 import { mainNav, megaNavGroups, site, specialistResources } from '@/lib/site-data'
 
 function cleanPhone(phone) {
@@ -145,6 +145,7 @@ export function SiteFooter() {
               <span>{office.address}</span>
             </div>
           ))}
+          <a className="footer-contact-line" href={`tel:+${cleanPhone(site.phones.karachi)}`}><Phone size={14} /> {site.phones.karachi}</a>
         </div>
       </div>
       <div className="container footer-bottom">
