@@ -6,5 +6,9 @@
 @media(min-width:901px){details.mobile-menu{display:none!important}}
 @media(max-width:600px){.site-header .brand-image-link{width:174px;min-width:174px;height:48px;flex-basis:174px;padding:4px 5px}.site-footer .brand-image-link{width:174px;height:48px;padding:4px 5px}}
 
+/* Homepage H1: wider for keyword line, gold accent line without italics */
+.hero h1{max-width:900px;font-size:clamp(40px,5.6vw,68px)}.hero h1 .hero-accent{color:var(--gold-light);font-style:normal}
+@media(max-width:600px){.hero h1{font-size:40px}}
+
 /* Footer theme matches the navy header */
 .site-footer{background:var(--navy);border-top:1px solid rgba(214,187,130,.35)}.site-footer .footer-bottom{border-top-color:rgba(255,255,255,.16)}
