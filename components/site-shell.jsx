@@ -15,7 +15,7 @@ function BrandLogo({ footer = false }) {
       style={{ background: 'none' }}
     >
       <img
-        src="/pakistan-legal-forum-logo.webp"
+        src="/pakistan-legal-forum-logo.webp?v=2"
         alt="Pakistan Legal Forum"
         className="navbar-brand-logo"
         width="990"
