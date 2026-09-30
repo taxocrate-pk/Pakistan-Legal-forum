@@ -18,8 +18,8 @@ function BrandLogo({ footer = false }) {
         src="/pakistan-legal-forum-logo.webp"
         alt="Pakistan Legal Forum"
         className="navbar-brand-logo"
-        width="520"
-        height="110"
+        width="990"
+        height="240"
         loading={footer ? 'lazy' : 'eager'}
       />
     </Link>
