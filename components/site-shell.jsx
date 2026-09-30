@@ -98,8 +98,7 @@ export function SiteHeader({ interior = false }) {
           <span>Pakistan&apos;s legal information &amp; knowledge platform</span>
           <div className="utility-links">
             <a href={`mailto:${site.email}`}>{site.email}</a>
-            <a href={`https://wa.me/${cleanPhone(site.phones.karachi)}`}>Karachi {site.phones.karachi}</a>
-            <a href={`https://wa.me/${cleanPhone(site.phones.lahore)}`}>Lahore {site.phones.lahore}</a>
+            <a href={`https://wa.me/${cleanPhone(site.phones.karachi)}`}>{site.phones.karachi}</a>
           </div>
         </div>
       </div>
@@ -144,7 +143,6 @@ export function SiteFooter() {
             <div className="footer-office" key={office.city}>
               <strong><MapPin size={13} /> {office.label}</strong>
               <span>{office.address}</span>
-              {office.phones.map((phone) => <a key={phone} href={`tel:${cleanPhone(phone)}`}>{phone}</a>)}
             </div>
           ))}
         </div>
