@@ -58,7 +58,6 @@ export default function Page() {
       <div className="hero-image"><Image src="/paklegal-court.png" alt="Courthouse architecture representing Pakistan legal information" fill priority sizes="100vw" /></div>
       <div className="hero-overlay" />
       <div className="container hero-content">
-        <p className="eyebrow hero-eyebrow">Pakistan Legal Forum</p>
         <h1>Pakistani law.<br /><i>Source-led guidance.</i><br />Practical next steps.</h1>
         <p className="hero-copy">A knowledge base for individuals, families, businesses and professionals who need to understand Pakistani law, documents and procedure before choosing the next legal step.</p>
         <div className="hero-actions"><a className="button button-gold" href="#knowledge-base">Explore legal guides <ArrowUpRight size={16} /></a><Link className="button button-outline-light" href="/contact-us/">Contact Pakistan Legal Forum</Link></div>
