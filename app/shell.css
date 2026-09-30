@@ -8,7 +8,8 @@
 
 /* Homepage H1: wider for keyword line, gold accent line without italics */
 .hero h1{max-width:900px;font-size:clamp(40px,5.6vw,68px)}.hero h1 .hero-accent{color:var(--gold-light);font-style:normal}
-@media(max-width:600px){.hero h1{font-size:40px}}
+.hero-copy{max-width:600px;font-size:18px;line-height:1.7}
+@media(max-width:600px){.hero h1{font-size:40px}.hero-copy{font-size:16px}}
 
 /* Footer theme matches the navy header */
 .site-footer{background:var(--navy);border-top:1px solid rgba(214,187,130,.35)}.site-footer .footer-bottom{border-top-color:rgba(255,255,255,.16)}
