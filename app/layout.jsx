@@ -14,6 +14,13 @@ export const metadata = {
   description: 'Source-led legal information about Pakistani family, property, succession, corporate, taxation, civil and documentation law, with professional references for further guidance.',
   applicationName: 'Pakistan Legal Forum',
   generator: 'PakLegal.com.pk',
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: '16x16 32x32 48x48 64x64', type: 'image/x-icon' },
+      { url: '/favicon.png', sizes: '96x96', type: 'image/png' },
+    ],
+    apple: [{ url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
+  },
   alternates: { canonical: '/' },
   openGraph: {
     type: 'website',
