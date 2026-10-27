@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation'
 import LegalGuidePage from '@/components/legal-guide-page'
+import SuccessionGuidePage from '@/components/succession-guide-page'
 import { guides, guideList } from '@/lib/guides'
 import { site } from '@/lib/site-data'
 
@@ -15,14 +16,14 @@ export async function generateMetadata({ params }) {
   return {
     title: guide.shortTitle || guide.h1,
     description: guide.description,
-    alternates: { canonical: url },
+    alternates: { canonical: url, ...(['succession-certificate', 'succession-certificate-urdu'].includes(slug) ? { languages: { 'en-PK': `${site.url}/succession-certificate/`, 'ur-PK': `${site.url}/succession-certificate-urdu/`, 'x-default': `${site.url}/succession-certificate/` } } : {}) },
     openGraph: {
       title: guide.h1,
       description: guide.description,
       url,
       siteName: site.name,
       type: 'article',
-      locale: 'en_PK',
+      locale: guide.language === 'ur-PK' ? 'ur_PK' : 'en_PK',
     },
     robots: { index: true, follow: true },
   }
@@ -32,5 +33,5 @@ export default async function KnowledgeGuide({ params }) {
   const { slug } = await params
   const guide = guides[slug]
   if (!guide) notFound()
-  return <LegalGuidePage guide={guide} />
+  return ['succession-certificate', 'succession-certificate-urdu'].includes(slug) ? <SuccessionGuidePage guide={guide} /> : <LegalGuidePage guide={guide} />
 }

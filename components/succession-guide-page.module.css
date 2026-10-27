@@ -1,0 +1,24 @@
+
+.page .openingHeading { font: 600 clamp(22px, 2.5vw, 30px)/1.4 Georgia, serif; margin: 24px 0 0; max-width: 900px; color: #f2e8d2; }
+.languages { display: flex; gap: 16px; margin-top: 24px; }
+.languages a { border: 1px solid #bda673; color: #fff; padding: 8px 14px; border-radius: 3px; text-decoration: none; }
+.languages a[aria-current] { background: #f1ede3; color: #142e41; }
+.page a:focus-visible, .faq summary:focus-visible { outline: 3px solid #b28b42; outline-offset: 4px; }
+.image { margin: 0 0 32px; }
+.image img { display: block; width: 100%; height: auto; border-radius: 4px; }
+.faq summary { cursor: pointer; padding: 4px 0; }
+.page .faq summary h3 { display: inline; font-size: 18px; line-height: 1.6; }
+.page .faq[open] summary { margin-bottom: 12px; }
+.page :global(.kb-article) a { color: #755318; text-decoration: underline; text-underline-offset: 3px; }
+.page .updated { color: #3b4750; font-size: 13px; margin-top: 24px; }
+.page :global(.kb-hero), .page :global(.kb-article), .page :global(.kb-sidebar) { overflow-wrap: anywhere; }
+.urdu :global(.kb-hero), .urdu :global(.kb-article), .urdu :global(.kb-sidebar) { font-family: 'Noto Nastaliq Urdu', 'Noto Naskh Arabic', 'Jameel Noori Nastaleeq', 'Urdu Typesetting', Tahoma, serif; }
+.urdu :global(.kb-hero) h1, .urdu .openingHeading, .urdu :global(.kb-article) h2, .urdu :global(.kb-article) h3, .urdu :global(.kb-sidebar) h2, .urdu :global(.kb-summary) strong { font-family: inherit; letter-spacing: 0; line-height: 1.9; }
+.urdu :global(.kb-hero) h1 { font-size: clamp(30px, 4vw, 48px); }
+.urdu :global(.kb-article) p, .urdu :global(.kb-article) li, .urdu :global(.kb-dek) { font-size: 18px; line-height: 2.3; }
+.urdu :global(.kb-article) ul, .urdu :global(.kb-article) ol { padding-left: 0; padding-right: 24px; }
+.urdu :global(.kb-summary) { border-left: 0; border-right: 3px solid var(--gold); }
+.urdu :global(.kb-table) th, .urdu :global(.kb-table) td { text-align: right; line-height: 2; }
+.urdu :global(.kb-toc) a, .urdu :global(.kb-related) a { font-size: 15px; line-height: 2; }
+.urdu :global(.kb-meta) { letter-spacing: 0; }
+@media (max-width: 600px) { .page .openingHeading { font-size: 22px; } .urdu :global(.kb-article) h2 { font-size: 25px; } .urdu :global(.kb-article) p, .urdu :global(.kb-article) li { font-size: 17px; } }
