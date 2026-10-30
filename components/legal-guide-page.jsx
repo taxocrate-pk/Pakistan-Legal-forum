@@ -104,12 +104,16 @@ export default function LegalGuidePage({ guide }) {
 
             {guide.sources?.length > 0 && <section className="kb-sources" id="official-sources"><h2>Official Sources and Further Reading</h2><p>Legal procedures change through statutes, rules, notifications and administrative practice. Check the current official source before acting on a time-sensitive requirement.</p><div className="kb-source-list">{guide.sources.map((source) => <a href={source.url} key={source.url} target="_blank" rel="noreferrer"><span>{source.label}</span><ArrowUpRight size={14} /></a>)}</div></section>}
 
+            {guide.recommended?.length > 0 && <section className="kb-sources" id="recommended-legal-help"><h2>{guide.recommendedTitle || 'Recommended Legal Help'}</h2>{guide.recommendedIntro && <p>{guide.recommendedIntro}</p>}<div className="kb-source-list">{guide.recommended.map((item) => <a href={item.url} key={item.url} target="_blank" rel="noopener"><span>{item.label}</span><ArrowUpRight size={14} /></a>)}</div></section>}
+
+            {guide.credit && <p className="kb-credit"><strong>Reviewed by:</strong> {guide.credit.reviewedBy}<br /><strong>Published by:</strong> {guide.credit.publishedBy}<br /><strong>Last updated:</strong> {guide.credit.updated}</p>}
+
             <p className="kb-disclaimer">This guide provides general legal information for Pakistan. It does not replace advice based on the facts, documents, jurisdiction and current law applicable to an individual matter.</p>
           </article>
 
           <aside className="kb-sidebar">
             <div className="kb-sticky">
-              <div className="kb-toc"><h2>On this page</h2>{guide.sections.map((section) => <a key={section.title} href={`#${idFromTitle(section.title)}`}>{section.title}</a>)}{guide.faqs?.length > 0 && <a href="#frequently-asked-questions">Frequently Asked Questions</a>}{guide.sources?.length > 0 && <a href="#official-sources">Official Sources</a>}</div>
+              <div className="kb-toc"><h2>On this page</h2>{guide.sections.map((section) => <a key={section.title} href={`#${idFromTitle(section.title)}`}>{section.title}</a>)}{guide.faqs?.length > 0 && <a href="#frequently-asked-questions">Frequently Asked Questions</a>}{guide.sources?.length > 0 && <a href="#official-sources">Official Sources</a>}{guide.recommended?.length > 0 && <a href="#recommended-legal-help">Recommended Legal Help</a>}</div>
               <div className="kb-related"><h2>Related PakLegal guides</h2>{guide.related?.map((item) => <Link key={item.href} href={item.href}>{item.label}</Link>)}</div>
             </div>
           </aside>
