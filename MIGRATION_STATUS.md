@@ -1,5 +1,7 @@
 # PakLegal.com.pk Next.js Migration Status
 
+> **Cut-over complete (owner-confirmed 4 Nov 2026):** paklegal.com.pk has been live on Next.js/Vercel from this repo for several weeks. The WordPress cut-over gate below is historical; scheduled refinement runs may edit pages under the SEO DNA rules.
+
 Updated: 2026-09-29
 
 ## Migration rules
