@@ -101,6 +101,7 @@ export default function LegalGuidePage({ guide }) {
             <div className="kb-breadcrumbs"><Link href="/">Home</Link><span>/</span><span>{guide.category}</span><span>/</span><span>{guide.shortTitle || guide.h1}</span></div>
             <p className="eyebrow">{guide.eyebrow || guide.category}</p>
             <h1>{guide.h1}</h1>
+            {guide.dna207d && guide.heroH2 && <h2 className="kb-hero-h2">{guide.heroH2}</h2>}
             <p className="kb-dek">{guide.dek}</p>
             {guide.dna207d && <div className="kb-hero-actions"><a className="button button-gold" href={`https://wa.me/${cleanPhone(site.phones.karachi)}`}><MessageCircle size={16} /> {guide.whatsappLabel || 'Ask on WhatsApp'}</a></div>}
             <div className="kb-meta"><span>Guide reviewed: {guide.reviewedLabel}</span><span>Pakistan legal information</span><span>Official-source checks included</span></div>
@@ -111,8 +112,10 @@ export default function LegalGuidePage({ guide }) {
 
         <div className="container kb-layout">
           <article className="kb-article">
-            <div className="kb-summary"><strong>{guide.summaryTitle || 'Key legal position'}</strong>{Array.isArray(guide.summary) ? guide.summary.map((paragraph, index) => <p key={`summary-${index}`}>{paragraph}</p>) : <p>{guide.summary}</p>}</div>
-            {guide.intro?.map((paragraph, index) => <p key={`intro-${index}`}>{paragraph}</p>)}
+            <div className="kb-summary">{guide.dna207d ? <h2 className="kb-summary-h2" id="executive-summary">{guide.summaryTitle || 'Executive Summary'}</h2> : <strong>{guide.summaryTitle || 'Key legal position'}</strong>}{Array.isArray(guide.summary) ? guide.summary.map((paragraph, index) => <p key={`summary-${index}`}>{paragraph}</p>) : <p>{guide.summary}</p>}</div>
+            {guide.dna207d && guide.introTitle
+              ? <section id={idFromTitle(guide.introTitle)}><h2>{guide.introTitle}</h2>{guide.intro?.map((paragraph, index) => <p key={`intro-${index}`}>{paragraph}</p>)}</section>
+              : guide.intro?.map((paragraph, index) => <p key={`intro-${index}`}>{paragraph}</p>)}
 
             {guide.sections.map((section) => {
               const sectionId = idFromTitle(section.title)
