@@ -1,10 +1,43 @@
 import Link from 'next/link'
-import { ArrowUpRight } from 'lucide-react'
+import { ArrowUpRight, Clock, MapPin, MessageCircle, Phone } from 'lucide-react'
 import { ConsultationBand, SiteFooter, SiteHeader } from '@/components/site-shell'
 import { site, specialistResources } from '@/lib/site-data'
 
 function idFromTitle(value = '') {
   return value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
+}
+
+function cleanPhone(phone = '') {
+  return phone.replace(/\D/g, '').replace(/^0/, '92')
+}
+
+// SEO DNA 2.07D (D9, D10): short office labels and contact hours. Rendered only
+// for guides that opt in with `dna207d: true`, so unrefined (protected) pages
+// keep their current output until the owner approves a site-wide rollout.
+export const dnaOffices = [
+  { label: 'Office 1 — DHA Phase 7', city: 'Karachi' },
+  { label: 'Office 2 — Gulistan-e-Jauhar', city: 'Karachi' },
+  { label: 'Islamabad Office — G-9 Markaz', city: 'Islamabad' },
+  { label: 'Lahore Office — Chauburji', city: 'Lahore' },
+]
+
+function OfficeStrip({ guide }) {
+  const phone = site.phones.karachi
+  return (
+    <section className="kb-office-strip" aria-label="Offices and consultation">
+      <div className="container kb-office-grid">
+        <div className="kb-office-list">
+          <p className="kb-office-kicker">Offices and consultation</p>
+          <ul>{dnaOffices.map((office) => <li key={office.label}><MapPin size={14} /> <span>{office.label}, {office.city}</span></li>)}</ul>
+        </div>
+        <div className="kb-office-actions">
+          <a className="button button-gold" href={`https://wa.me/${cleanPhone(phone)}`}><MessageCircle size={16} /> {guide.whatsappLabel || 'Ask on WhatsApp'}</a>
+          <a className="kb-office-call" href={`tel:+${cleanPhone(phone)}`}><Phone size={14} /> {phone}</a>
+          <span className="kb-office-hours"><Clock size={14} /> Calls 10 am – 10 pm · WhatsApp 24 hours, 7 days</span>
+        </div>
+      </div>
+    </section>
+  )
 }
 
 function JsonLd({ guide }) {
@@ -18,6 +51,7 @@ function JsonLd({ guide }) {
     url: site.url,
     logo: { '@type': 'ImageObject', url: logoUrl },
     email: site.email,
+    ...(guide.dna207d ? { telephone: '+92-333-2316871', openingHours: 'Mo-Su 10:00-22:00' } : {}),
   }
   const graph = [
     organization,
@@ -68,13 +102,16 @@ export default function LegalGuidePage({ guide }) {
             <p className="eyebrow">{guide.eyebrow || guide.category}</p>
             <h1>{guide.h1}</h1>
             <p className="kb-dek">{guide.dek}</p>
+            {guide.dna207d && <div className="kb-hero-actions"><a className="button button-gold" href={`https://wa.me/${cleanPhone(site.phones.karachi)}`}><MessageCircle size={16} /> {guide.whatsappLabel || 'Ask on WhatsApp'}</a></div>}
             <div className="kb-meta"><span>Guide reviewed: {guide.reviewedLabel}</span><span>Pakistan legal information</span><span>Official-source checks included</span></div>
           </div>
         </section>
 
+        {guide.dna207d && <OfficeStrip guide={guide} />}
+
         <div className="container kb-layout">
           <article className="kb-article">
-            <div className="kb-summary"><strong>{guide.summaryTitle || 'Key legal position'}</strong><p>{guide.summary}</p></div>
+            <div className="kb-summary"><strong>{guide.summaryTitle || 'Key legal position'}</strong>{Array.isArray(guide.summary) ? guide.summary.map((paragraph, index) => <p key={`summary-${index}`}>{paragraph}</p>) : <p>{guide.summary}</p>}</div>
             {guide.intro?.map((paragraph, index) => <p key={`intro-${index}`}>{paragraph}</p>)}
 
             {guide.sections.map((section) => {
@@ -122,7 +159,7 @@ export default function LegalGuidePage({ guide }) {
         <section className="kb-network"><div className="container kb-network-grid"><div><p className="eyebrow">Specialist network</p><h2>Use the right resource for the legal question.</h2><p>PakLegal is structured as a knowledge base. Where a reader needs deeper specialist material or individual professional assistance, these established legal resources provide subject-focused guidance.</p></div><div className="kb-network-links">{specialistResources.map((resource) => <a className="kb-network-card" key={resource.url} href={resource.url} target="_blank" rel="noreferrer"><strong>{resource.name}</strong><span>{resource.description}</span></a>)}</div></div></section>
         <ConsultationBand />
       </main>
-      <SiteFooter />
+      <SiteFooter dna207d={guide.dna207d} />
     </>
   )
 }

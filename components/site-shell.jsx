@@ -114,7 +114,16 @@ export function SiteHeader({ interior = false }) {
   )
 }
 
-export function SiteFooter() {
+const dnaFooterOffices = [
+  { key: 'k1', label: 'Office 1 — DHA Phase 7', address: 'DHA Phase 7, Karachi' },
+  { key: 'k2', label: 'Office 2 — Gulistan-e-Jauhar', address: 'Gulistan-e-Jauhar, Karachi' },
+  { key: 'isb', label: 'Islamabad Office', address: 'G-9 Markaz, Islamabad' },
+  { key: 'lhr', label: 'Lahore Office', address: 'Chauburji, Lahore' },
+]
+
+// `dna207d` opts a page into the SEO DNA 2.07D footer (D8 credit, D9 office
+// labels, D10 hours). Pages without the flag render exactly as before.
+export function SiteFooter({ dna207d = false } = {}) {
   return (
     <footer className="site-footer">
       <div className="container footer-grid footer-grid-expanded">
@@ -139,17 +148,25 @@ export function SiteFooter() {
         </div>
         <div className="footer-offices">
           <h4>Office network</h4>
-          {site.offices.map((office) => (
-            <div className="footer-office" key={office.city}>
-              <strong><MapPin size={13} /> {office.label}</strong>
-              <span>{office.address}</span>
-            </div>
-          ))}
+          {dna207d
+            ? dnaFooterOffices.map((office) => (
+              <div className="footer-office" key={office.key}>
+                <strong><MapPin size={13} /> {office.label}</strong>
+                <span>{office.address}</span>
+              </div>
+            ))
+            : site.offices.map((office) => (
+              <div className="footer-office" key={office.city}>
+                <strong><MapPin size={13} /> {office.label}</strong>
+                <span>{office.address}</span>
+              </div>
+            ))}
           <a className="footer-contact-line" href={`tel:+${cleanPhone(site.phones.karachi)}`}><Phone size={14} /> {site.phones.karachi}</a>
+          {dna207d && <span className="footer-contact-line">Calls 10 am – 10 pm · WhatsApp 24 hours, 7 days</span>}
         </div>
       </div>
       <div className="container footer-bottom">
-        <span>© 2026 Pakistan Legal Forum · General legal information, not a substitute for advice on individual facts.</span>
+        <span>© 2026 Pakistan Legal Forum · General legal information, not a substitute for advice on individual facts.{dna207d && <> · Creation: <a href="https://digitocrate.com/" target="_blank">DIGITOCRATE</a> – Promotion: <a href="https://seocontentmaster.com/" target="_blank">SEO CONTENT MASTER</a></>}</span>
         <div><Link href="/privacy-policy/">Privacy</Link><Link href="/terms-of-service/">Terms</Link><Link href="/contact-us/">Contact</Link></div>
       </div>
     </footer>
