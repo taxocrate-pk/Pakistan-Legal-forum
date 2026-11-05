@@ -40,10 +40,19 @@ function OfficeStrip({ guide }) {
   )
 }
 
+function GuideFigure({ image }) {
+  if (!image) return null
+  return (
+    <figure className="kb-figure">
+      <img src={image.src} alt={image.alt} width="1200" height="800" loading="lazy" decoding="async" />
+    </figure>
+  )
+}
+
 function JsonLd({ guide }) {
   const url = `${site.url}/${guide.slug}/`
   const logoUrl = `${site.url}/icon.svg`
-  const imageUrl = `${site.url}/paklegal-court.png`
+  const imageUrl = guide.images?.length ? `${site.url}${guide.images[0].src}` : `${site.url}/paklegal-court.png`
   const organization = {
     '@type': 'Organization',
     '@id': `${site.url}/#organization`,
@@ -113,15 +122,20 @@ export default function LegalGuidePage({ guide }) {
         <div className="container kb-layout">
           <article className="kb-article">
             <div className="kb-summary">{(guide.dna207d || guide.headingFix) ? <h2 className="kb-summary-h2" id="executive-summary">{guide.summaryTitle || 'Executive Summary'}</h2> : <strong>{guide.summaryTitle || 'Key legal position'}</strong>}{Array.isArray(guide.summary) ? guide.summary.map((paragraph, index) => <p key={`summary-${index}`}>{paragraph}</p>) : <p>{guide.summary}</p>}</div>
+            <GuideFigure image={guide.images?.[0]} />
             {(guide.dna207d || guide.headingFix) && guide.introTitle
               ? <section id={idFromTitle(guide.introTitle)}><h2>{guide.introTitle}</h2>{guide.intro?.map((paragraph, index) => <p key={`intro-${index}`}>{paragraph}</p>)}</section>
               : guide.intro?.map((paragraph, index) => <p key={`intro-${index}`}>{paragraph}</p>)}
 
-            {guide.sections.map((section) => {
+            {guide.sections.map((section, sectionIndex) => {
               const sectionId = idFromTitle(section.title)
+              const extraImages = guide.images?.slice(1) || []
+              const slotIndexes = [Math.floor(guide.sections.length * 0.35), Math.max(Math.floor(guide.sections.length * 0.7), Math.floor(guide.sections.length * 0.35) + 1)]
+              const figure = extraImages[slotIndexes.indexOf(sectionIndex)] || null
               return (
                 <section key={section.title} id={sectionId}>
                   <h2>{section.title}</h2>
+                  <GuideFigure image={figure} />
                   {section.lead && <p><strong>{section.lead}</strong></p>}
                   {section.paragraphs?.map((paragraph, index) => <p key={`${sectionId}-p-${index}`}>{paragraph}</p>)}
                   {section.subsections?.map((sub) => (
