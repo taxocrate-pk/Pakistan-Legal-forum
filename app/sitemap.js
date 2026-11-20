@@ -1,3 +1,4 @@
+import { listArticles } from '@/lib/articles-store'
 import { guideList } from '@/lib/guides'
 
 const staticRoutes = [
@@ -9,9 +10,17 @@ const staticRoutes = [
   { path: 'terms-of-service/', priority: 0.3, changeFrequency: 'yearly' },
 ]
 
-export default function sitemap() {
+export const dynamic = 'force-dynamic'
+
+export default async function sitemap() {
   const now = new Date()
+  let articles = []
+  try {
+    articles = (await listArticles()).filter((a) => a.status === 'published')
+  } catch {}
   return [
+    { url: 'https://paklegal.com.pk/articles', lastModified: now, changeFrequency: 'weekly', priority: 0.8 },
+    ...articles.map((a) => ({ url: `https://paklegal.com.pk/articles/${a.slug}`, lastModified: new Date(a.updatedAt || a.createdAt), changeFrequency: 'monthly', priority: 0.7 })),
     ...staticRoutes.map((item) => ({
       url: `https://paklegal.com.pk/${item.path}`,
       lastModified: now,
