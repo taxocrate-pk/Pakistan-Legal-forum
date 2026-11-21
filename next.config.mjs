@@ -8,13 +8,7 @@ const nextConfig = {
   },
   async redirects() {
     return [
-      {
-        // One canonical host: www.paklegal.com.pk -> paklegal.com.pk
-        source: '/:path*',
-        has: [{ type: 'host', value: 'www.paklegal.com.pk' }],
-        destination: 'https://paklegal.com.pk/:path*',
-        permanent: true,
-      },
+      // www.paklegal.com.pk -> paklegal.com.pk is handled in proxy.js (keeps the trailing slash, one hop).
       {
         source: '/home',
         destination: '/',
