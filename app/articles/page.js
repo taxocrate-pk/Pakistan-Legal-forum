@@ -6,7 +6,7 @@ export const dynamic = "force-dynamic";
 export const metadata = {
   title: `Legal Articles | ${ART.siteName}`,
   description: `Latest legal articles and updates from ${ART.siteName} on Pakistani family, property, corporate and tax law.`,
-  alternates: { canonical: "/articles" },
+  alternates: { canonical: "/articles/" },
 };
 
 export default async function Articles() {

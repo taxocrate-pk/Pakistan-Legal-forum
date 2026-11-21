@@ -1,10 +1,20 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Canonicals, sitemap and legacy WordPress URLs all end in '/'. Without this,
+  // Next.js 308-redirected every '/slug/' to '/slug', so each canonical pointed at a redirect.
+  trailingSlash: true,
   images: {
     unoptimized: true,
   },
   async redirects() {
     return [
+      {
+        // One canonical host: www.paklegal.com.pk -> paklegal.com.pk
+        source: '/:path*',
+        has: [{ type: 'host', value: 'www.paklegal.com.pk' }],
+        destination: 'https://paklegal.com.pk/:path*',
+        permanent: true,
+      },
       {
         source: '/home',
         destination: '/',

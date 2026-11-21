@@ -21,7 +21,7 @@ export async function generateMetadata({ params }) {
   return {
     title: a.title,
     description: a.description || a.body.replace(/[#*\[\]()>_`]/g, "").slice(0, 155),
-    alternates: { canonical: `/articles/${a.slug}` },
+    alternates: { canonical: `/articles/${a.slug}/` },
     robots: a.status === "published" ? undefined : { index: false },
   };
 }
