@@ -1,5 +1,6 @@
 import { listArticles } from '@/lib/articles-store'
 import { guideList } from '@/lib/guides'
+import { qaCategories, questions } from '@/lib/legal-qa'
 
 const staticRoutes = [
   { path: '', priority: 1, changeFrequency: 'weekly' },
@@ -32,6 +33,19 @@ export default async function sitemap() {
       lastModified: new Date(guide.reviewed),
       changeFrequency: 'monthly',
       priority: 0.9,
+    })),
+    { url: 'https://paklegal.com.pk/legal-questions/', lastModified: new Date(questions.reduce((d, q) => (q.updated > d ? q.updated : d), '')), changeFrequency: 'daily', priority: 0.9 },
+    ...qaCategories.map((c) => ({
+      url: `https://paklegal.com.pk/legal-questions/${c.slug}/`,
+      lastModified: new Date(questions.filter((q) => q.category === c.slug).reduce((d, q) => (q.updated > d ? q.updated : d), '2026-11-24')),
+      changeFrequency: 'weekly',
+      priority: 0.7,
+    })),
+    ...questions.map((q) => ({
+      url: `https://paklegal.com.pk/legal-questions/${q.slug}/`,
+      lastModified: new Date(q.updated),
+      changeFrequency: 'monthly',
+      priority: 0.8,
     })),
   ]
 }

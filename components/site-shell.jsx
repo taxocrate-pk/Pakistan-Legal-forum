@@ -78,6 +78,7 @@ function MobileNavigation() {
             ))}
           </div>
         </details>
+        <Link href="/legal-questions/">Legal Q&amp;A</Link>
         <Link href="/family-law-in-pakistan/">Family Law</Link>
         <Link href="/pakistani-property-law/">Property Law</Link>
         <Link href="/secp-company-registration-in-pakistan/">Tax &amp; Corporate</Link>
