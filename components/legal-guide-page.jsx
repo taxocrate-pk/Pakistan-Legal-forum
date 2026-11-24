@@ -158,7 +158,7 @@ export default function LegalGuidePage({ guide }) {
 
             {guide.sources?.length > 0 && <section className="kb-sources" id="official-sources"><h2>Official Sources and Further Reading</h2><p>Legal procedures change through statutes, rules, notifications and administrative practice. Check the current official source before acting on a time-sensitive requirement.</p><div className="kb-source-list">{guide.sources.map((source) => <a href={source.url} key={source.url} target="_blank" rel="noreferrer"><span>{source.label}</span><ArrowUpRight size={14} /></a>)}</div></section>}
 
-            {guide.recommended?.length > 0 && <section className="kb-sources" id="recommended-legal-help"><h2>{guide.recommendedTitle || 'Recommended Legal Help'}</h2>{guide.recommendedIntro && <p>{guide.recommendedIntro}</p>}<div className="kb-source-list">{guide.recommended.map((item) => <a href={item.url} key={item.url} target="_blank" rel="noopener"><span>{item.label}</span><ArrowUpRight size={14} /></a>)}</div></section>}
+            {guide.recommended?.length > 0 && <section className="kb-sources" id="recommended-legal-help"><h2>{guide.recommendedTitle || 'Recommended Legal Help'}</h2>{guide.recommendedIntro && <p>{guide.recommendedIntro}</p>}<div className="kb-source-list">{guide.recommended.map((item) => <a href={item.url} key={item.url} target="_blank" rel="nofollow noopener"><span>{item.label}</span><ArrowUpRight size={14} /></a>)}</div></section>}
 
             {guide.credit && <p className="kb-credit"><strong>Reviewed by:</strong> {guide.credit.reviewedBy}<br /><strong>Published by:</strong> {guide.credit.publishedBy}<br /><strong>Last updated:</strong> {guide.credit.updated}</p>}
 
@@ -173,7 +173,7 @@ export default function LegalGuidePage({ guide }) {
           </aside>
         </div>
 
-        <section className="kb-network"><div className="container kb-network-grid"><div><p className="eyebrow">Specialist network</p><h2>Use the right resource for the legal question.</h2><p>PakLegal is structured as a knowledge base. Where a reader needs deeper specialist material or individual professional assistance, these established legal resources provide subject-focused guidance.</p></div><div className="kb-network-links">{specialistResources.map((resource) => <a className="kb-network-card" key={resource.url} href={resource.url} target="_blank" rel="noreferrer"><strong>{resource.name}</strong><span>{resource.description}</span></a>)}</div></div></section>
+        <section className="kb-network"><div className="container kb-network-grid"><div><p className="eyebrow">Specialist network</p><h2>Use the right resource for the legal question.</h2><p>PakLegal is structured as a knowledge base. Where a reader needs deeper specialist material or individual professional assistance, these established legal resources provide subject-focused guidance.</p></div><div className="kb-network-links">{specialistResources.map((resource) => <a className="kb-network-card" key={resource.url} href={resource.url} target="_blank" rel="nofollow noopener"><strong>{resource.name}</strong><span>{resource.description}</span></a>)}</div></div></section>
         <ConsultationBand />
       </main>
       <SiteFooter dna207d={guide.dna207d} />

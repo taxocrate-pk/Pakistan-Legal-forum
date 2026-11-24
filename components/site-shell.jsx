@@ -145,7 +145,7 @@ export function SiteFooter({ dna207d = false } = {}) {
         </div>
         <div>
           <h4>Specialist resources</h4>
-          {specialistResources.map((item) => <a key={item.url} href={item.url} target="_blank" rel="noreferrer">{item.name}</a>)}
+          {specialistResources.map((item) => <a key={item.url} href={item.url} target="_blank" rel="nofollow noopener">{item.name}</a>)}
         </div>
         <div className="footer-offices">
           <h4>Office network</h4>

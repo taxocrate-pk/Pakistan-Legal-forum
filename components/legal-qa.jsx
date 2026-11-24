@@ -54,7 +54,7 @@ export function HelpBox({ q, categoryName }) {
       <div className="qa-help-actions">
         <a className="button button-gold" href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`} target="_blank" rel="noopener"><MessageCircle size={16} /> Ask on WhatsApp</a>
       </div>
-      <p className="qa-help-money">{q.money.text} <a href={q.money.href} target="_blank" rel="noopener">{q.money.anchor}</a>.</p>
+      <p className="qa-help-money">{q.money.text} <a href={q.money.href} target="_blank" rel="nofollow noopener">{q.money.anchor}</a>.</p>
     </section>
   )
 }
