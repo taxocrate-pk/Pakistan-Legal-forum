@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { ArrowUpRight, ChevronDown, Mail, MapPin, Menu, MessageCircle, Phone } from 'lucide-react'
+import { ArrowUpRight, ChevronDown, Mail, MapPin, Menu, MessageCircle } from 'lucide-react'
 import { mainNav, megaNavGroups, site, specialistResources } from '@/lib/site-data'
 
 function cleanPhone(phone) {
@@ -162,8 +162,8 @@ export function SiteFooter({ dna207d = false } = {}) {
                 <span>{office.address}</span>
               </div>
             ))}
-          <a className="footer-contact-line" href={`tel:+${cleanPhone(site.phones.karachi)}`}><Phone size={14} /> {site.phones.karachi}</a>
-          {dna207d && <span className="footer-contact-line">Calls 10 am – 10 pm · WhatsApp 24 hours, 7 days</span>}
+          <a className="footer-contact-line" href={`https://wa.me/${cleanPhone(site.phones.karachi)}`} target="_blank" rel="noopener"><MessageCircle size={14} /> WhatsApp {site.phones.karachi}</a>
+          {dna207d && <span className="footer-contact-line">WhatsApp 24 hours, 7 days</span>}
         </div>
       </div>
       <div className="container footer-bottom">
