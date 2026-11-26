@@ -121,11 +121,13 @@ export default function LegalGuidePage({ guide }) {
 
         <div className="container kb-layout">
           <article className="kb-article">
-            <div className="kb-summary">{(guide.dna207d || guide.headingFix) ? <h2 className="kb-summary-h2" id="executive-summary">{guide.summaryTitle || 'Executive Summary'}</h2> : <strong>{guide.summaryTitle || 'Key legal position'}</strong>}{Array.isArray(guide.summary) ? guide.summary.map((paragraph, index) => <p key={`summary-${index}`}>{paragraph}</p>) : <p>{guide.summary}</p>}</div>
+            {guide.summary && <div className="kb-summary">{(guide.dna207d || guide.headingFix) ? <h2 className="kb-summary-h2" id="executive-summary">{guide.summaryTitle || 'Executive Summary'}</h2> : <strong>{guide.summaryTitle || 'Key legal position'}</strong>}{Array.isArray(guide.summary) ? guide.summary.map((paragraph, index) => <p key={`summary-${index}`}>{paragraph}</p>) : <p>{guide.summary}</p>}</div>}
             <GuideFigure image={guide.images?.[0]} />
             {(guide.dna207d || guide.headingFix) && guide.introTitle
               ? <section id={idFromTitle(guide.introTitle)}><h2>{guide.introTitle}</h2>{guide.intro?.map((paragraph, index) => <p key={`intro-${index}`}>{paragraph}</p>)}</section>
               : guide.intro?.map((paragraph, index) => <p key={`intro-${index}`}>{paragraph}</p>)}
+
+            {guide.bodyHtml && <div className="kb-body" dangerouslySetInnerHTML={{ __html: guide.bodyHtml }} />}
 
             {guide.sections.map((section, sectionIndex) => {
               const sectionId = idFromTitle(section.title)
@@ -167,7 +169,7 @@ export default function LegalGuidePage({ guide }) {
 
           <aside className="kb-sidebar">
             <div className="kb-sticky">
-              <div className="kb-toc"><h2>On this page</h2>{guide.sections.map((section) => <a key={section.title} href={`#${idFromTitle(section.title)}`}>{section.title}</a>)}{guide.faqs?.length > 0 && <a href="#frequently-asked-questions">Frequently Asked Questions</a>}{guide.sources?.length > 0 && <a href="#official-sources">Official Sources</a>}{guide.recommended?.length > 0 && <a href="#recommended-legal-help">Recommended Legal Help</a>}</div>
+              <div className="kb-toc"><h2>On this page</h2>{guide.toc?.map((item) => <a key={item.id} href={`#${item.id}`}>{item.title}</a>)}{guide.sections.map((section) => <a key={section.title} href={`#${idFromTitle(section.title)}`}>{section.title}</a>)}{guide.faqs?.length > 0 && <a href="#frequently-asked-questions">Frequently Asked Questions</a>}{guide.sources?.length > 0 && <a href="#official-sources">Official Sources</a>}{guide.recommended?.length > 0 && <a href="#recommended-legal-help">Recommended Legal Help</a>}</div>
               <div className="kb-related"><h2>Related PakLegal guides</h2>{guide.related?.map((item) => <Link key={item.href} href={item.href}>{item.label}</Link>)}</div>
             </div>
           </aside>
